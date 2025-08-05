@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace UsersService.Models;
+namespace UsersService.Models.Requests;
 
 public class UserUpdate
 {

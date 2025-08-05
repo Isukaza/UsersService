@@ -1,6 +1,6 @@
 using DAL.Models.Enums;
 
-namespace UsersService.Models;
+namespace UsersService.Models.Responses;
 
 public class UserInfo
 {
