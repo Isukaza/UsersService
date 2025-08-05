@@ -1,5 +1,6 @@
+using DAL.Models.Enums;
 using Microsoft.AspNetCore.Mvc;
-using UsersService.Managers;
+using UsersService.Managers.Interfaces;
 using UsersService.Models.Requests;
 using UsersService.Models.Responses;
 
@@ -22,6 +23,13 @@ public class UsersController(IUserManager manager) : ControllerBase
     public async Task<ActionResult<IEnumerable<UserInfo>>> GetAll()
     {
         var users = await manager.GetAllAsync();
+        return Ok(users);
+    }
+    
+    [HttpGet("by-subscription/{type}")]
+    public async Task<ActionResult<IEnumerable<UserInfo>>> GetUsersBySubscriptionType(SubscriptionType type)
+    {
+        var users = await manager.GetUsersBySubscriptionTypeAsync(type);
         return Ok(users);
     }
 

@@ -5,6 +5,7 @@ using DAL;
 using DAL.Repositories;
 using DAL.Repositories.Interfaces;
 using UsersService.Managers;
+using UsersService.Managers.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +24,11 @@ builder.Services.AddHttpLogging(logging =>
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+        
+        options.JsonSerializerOptions.Converters.Add(
+            new JsonStringEnumConverter()
+        );
     });
 
 builder.Services.AddEndpointsApiExplorer();
