@@ -1,5 +1,7 @@
 using DAL.Models;
+using DAL.Models.Enums;
 using DAL.Repositories.Interfaces;
+using UsersService.Managers.Interfaces;
 using UsersService.Models.Requests;
 using UsersService.Models.Responses;
 
@@ -19,6 +21,12 @@ public class UserManager(IUserRepository repo) : IUserManager
         return user == null
             ? null
             : ToUserInfo(user);
+    }
+
+    public async Task<IEnumerable<UserInfo>> GetUsersBySubscriptionTypeAsync(SubscriptionType type)
+    {
+        var users = await repo.GetUsersBySubscriptionTypeAsync(type);
+        return users.Select(ToUserInfo);
     }
 
     public async Task<UserInfo> CreateAsync(UserCreate userCreate)
