@@ -4,7 +4,9 @@ namespace DAL.Repositories.Interfaces;
 
 public interface IUserRepository
 {
-    Task<User?> GetByIdAsync(int id);
+    Task<User> GetByIdAsync(int id);
     Task<IEnumerable<User>> GetAllAsync();
-    Task<Subscription?> GetSubscriptionAsync(int subscriptionId);
+    Task<User> CreateAsync(User user);
+    Task<User> UpdateAsync(User user);
+    Task<bool> DeleteAsync(int id);
 }

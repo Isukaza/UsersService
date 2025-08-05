@@ -1,6 +1,6 @@
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
-
 using DAL;
 using DAL.Repositories;
 using DAL.Repositories.Interfaces;
@@ -20,15 +20,23 @@ builder.Services.AddHttpLogging(logging =>
     logging.CombineLogs = true;
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserManager, UserManager>();
+builder.Services.AddScoped<ISubscriptionManager, SubscriptionManager>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
 
 builder.Services.AddDbContext<UserDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
