@@ -1,4 +1,10 @@
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.EntityFrameworkCore;
+
+using DAL;
+using DAL.Repositories;
+using DAL.Repositories.Interfaces;
+using UsersService.Managers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +23,12 @@ builder.Services.AddHttpLogging(logging =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IUserManager, UserManager>();
+
+builder.Services.AddDbContext<UserDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
