@@ -1,6 +1,5 @@
 using DAL.Models;
 using DAL.Repositories.Interfaces;
-using UsersService.Models;
 using UsersService.Models.Requests;
 using UsersService.Models.Responses;
 

@@ -1,4 +1,3 @@
-using UsersService.Models;
 using UsersService.Models.Requests;
 using UsersService.Models.Responses;
 

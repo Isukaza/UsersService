@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using UsersService.Managers;
-using UsersService.Models;
 using UsersService.Models.Requests;
 using UsersService.Models.Responses;
 
